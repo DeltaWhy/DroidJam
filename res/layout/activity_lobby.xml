@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LobbyActivity" >
+
+    <TextView
+        android:id="@+id/Username1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="21dp"
+        android:text="Username"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Username2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Username1"
+        android:layout_below="@+id/InstrumentButton1"
+  		android:paddingTop="100dip"
+        android:text="Username"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Username3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Username1"
+        android:layout_below="@+id/InstrumentButton2"
+  		android:paddingTop="100dip"
+        android:text="Username"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Username4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Username1"
+        android:layout_below="@+id/InstrumentButton3"
+  		android:paddingTop="100dip"
+        android:text="Username"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <CheckBox
+        android:id="@+id/CheckBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Username1"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/Username1" />
+
+    <CheckBox
+        android:id="@+id/CheckBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CheckBox1"
+        android:layout_alignTop="@+id/Username2" />
+
+    <CheckBox
+        android:id="@+id/CheckBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CheckBox1"
+        android:layout_alignTop="@+id/Username3" />
+
+    <CheckBox
+        android:id="@+id/CheckBox4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/CheckBox1"
+        android:layout_alignTop="@+id/Username4" />
+
+    <ImageButton
+        android:id="@+id/InstrumentButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Username1"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@+id/CheckBox1"
+        android:src="@android:drawable/btn_star" />
+
+    <ImageButton
+        android:id="@+id/InstrumentButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/InstrumentButton1"
+        android:layout_alignTop="@+id/Username2"
+        android:src="@android:drawable/btn_star" />
+
+    <ImageButton
+        android:id="@+id/InstrumentButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/InstrumentButton1"
+        android:layout_alignTop="@+id/Username3"
+        android:src="@android:drawable/btn_star" />
+
+    <ImageButton
+        android:id="@+id/InstrumentButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/InstrumentButton1"
+        android:layout_alignTop="@+id/Username4"
+        android:src="@android:drawable/btn_star" />
+
+    <Button
+        android:id="@+id/readyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="Ready" />
+
+</RelativeLayout>
