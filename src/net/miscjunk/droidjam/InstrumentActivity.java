@@ -3,18 +3,13 @@ package net.miscjunk.droidjam;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.support.v4.app.NavUtils;
-import android.util.Log;
 
 public class InstrumentActivity extends Activity implements InstrumentView.NoteListener {
     public final String TAG = "InstrumentActivity";
@@ -22,6 +17,7 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
     InstrumentSound sound;
     InstrumentView instrumentView;
     MidiCreator midi;
+    boolean recording;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +26,21 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_instrument);
         layout = (ViewGroup)findViewById(R.id.instrumentLayout);
-        instrumentView = InstrumentFactory.makeInstrumentView(this, "drums");
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        String instrument = null;
+        if (extras != null)
+        	instrument = extras.getString("instrument");
+        if (instrument == null)
+        	instrument = "keys";
+        instrumentView = InstrumentFactory.makeInstrumentView(this, instrument);
         instrumentView.setNoteListener(this);
         layout.addView(instrumentView);
-        sound = InstrumentFactory.makeInstrumentSound(this, "drums");
+        sound = InstrumentFactory.makeInstrumentSound(this, instrument);
         midi = new MidiCreator(this, "/storage/sdcard0/droidjam"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())+".mid");
         midi.beginRecording();
+        if (extras != null)
+        	recording = extras.getBoolean("recording", true);
     }
     
     @Override
@@ -45,27 +50,29 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
     }
     
     public void btnNoteOn(View v) {
-        noteOn(69);
+        noteOn(100);
     }
     
     public void btnNoteOff(View v) {
-        noteOff(69);
+        noteOff(100);
     }
     
     @Override
     public void noteOn(int note, int velocity) {
-        midi.noteOn(note, velocity);
+    	if (recording)
+    		midi.noteOn(note, velocity);
         sound.noteOn(note, velocity);
     }
     
     @Override
     public void noteOn(int note) {
-        noteOn(note, 64);
+        noteOn(note, 100);
     }
     
     @Override
     public void noteOff(int note) {
-        midi.noteOff(note);
+    	if (recording)
+    		midi.noteOff(note);
         sound.noteOff(note);
     }
 }

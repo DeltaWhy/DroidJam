@@ -7,7 +7,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 
 public class DrumView extends InstrumentView {
@@ -57,12 +56,12 @@ public class DrumView extends InstrumentView {
 		lowtomCenter.x = width / 6; 
 		lowtomCenter.y = height / 6 * 3;
 
-		cymbalCenter.x = width * 13 / 16;
-		cymbalCenter.y = height / 4;
+		cymbalCenter.x = width * 6 / 16;
+		cymbalCenter.y = height * 3 / 4;
 		bassCenter.x = width * 11 / 16;
 		bassCenter.y = height * 3 / 4;
-		snareCenter.x = width * 6 / 16;
-		snareCenter.y = height * 3 / 4;
+		snareCenter.x = width * 13 / 16;
+		snareCenter.y = height / 4;
 		
 		Paint whitePaint = new Paint();
 		whitePaint.setARGB(255, 255, 255, 255);

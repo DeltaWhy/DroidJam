@@ -9,5 +9,6 @@
     <string name="title_activity_join_band">JoinBandActivity</string>
     <string name="title_activity_one_note_samba">OneNoteSambaActivity</string>
     <string name="title_activity_instrument">InstrumentActivity</string>
+    <string name="title_activity_practice">PracticeActivity</string>
 
 </resources>

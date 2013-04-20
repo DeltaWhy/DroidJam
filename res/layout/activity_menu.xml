@@ -71,6 +71,16 @@
             android:layout_centerVertical="true"
             android:onClick="joinBand"
             android:text="Join a band" />
+        
+        <Button
+            android:id="@+id/practice"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/joinBand"
+            android:layout_alignRight="@+id/joinBand"
+            android:layout_marginBottom="24dp"
+            android:onClick="practice"
+            android:text="Practice" />
 
     </RelativeLayout>
 </ViewSwitcher>
