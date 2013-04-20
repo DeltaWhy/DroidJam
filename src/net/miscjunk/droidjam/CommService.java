@@ -55,7 +55,7 @@ public class CommService {
 		    return jObject;
 		  }
 	
-	public JSONObject postJSON(String url, JSONObject jObject) throws Exception 
+	public String postJSON(String url, JSONObject jObject) throws Exception 
 	{
 	    //instantiates httpclient to make request
 	    DefaultHttpClient httpclient = new DefaultHttpClient();
