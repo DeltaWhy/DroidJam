@@ -33,7 +33,10 @@ public class CommService {
         Log.d("JSON",o.toString());
      */
 
-	public JSONObject getJSON(String url){
+	public static final String API_BASE = "http://obsidian.miscjunk.net:9393";
+
+
+    public JSONObject getJSON(String url){
 		 StringBuilder builder = new StringBuilder();
 		    HttpClient client = new DefaultHttpClient();
 		    HttpGet httpGet = new HttpGet(url);
@@ -67,23 +70,6 @@ public class CommService {
 		    return jObject;
 		  }
 	
-	public String postJSON(String url, JSONObject jObject) throws Exception 
-	{
-	    //instantiates httpclient to make request
-	    DefaultHttpClient httpclient = new DefaultHttpClient();
-
-        JSONObject jObject = null;
-        if (jsonString != null) {
-            try {
-                jObject = new JSONObject(jsonString);				
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        return jObject;
-    }
-
     public JSONArray getJSONArray(String url){
         String jsonString = getString(url);
 

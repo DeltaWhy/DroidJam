@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Band extends Observable {
@@ -87,32 +89,65 @@ public class Band extends Observable {
 	 * Persistence
 	 */
 	public boolean create() {
-	    //TODO stub
-	    return false;
+	    try {
+        	    CommService comm = new CommService();
+        	    JSONObject jRequest = new JSONObject();
+        	    jRequest.put("name", name);
+        	    JSONObject bandJson = comm.postJSON(CommService.API_BASE+"/bands", jRequest);
+        	    fromJSONObject(bandJson);
+        	    return true;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 	
 	public boolean reload() {
-	    //TODO stub
-	    return false;
+	    try {
+        	    CommService comm = new CommService();
+        	    JSONObject bandJson = comm.getJSON(CommService.API_BASE+"/bands/"+id);
+        	    fromJSONObject(bandJson);
+        	    return true;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 	
 	public static Band findById(String id) {
-	    //TODO stub
-	    return null;
+	    CommService comm = new CommService();
+	    JSONObject bandJson = comm.getJSON(CommService.API_BASE+"/bands/"+id);
+	    Band band = new Band("");
+	    try {
+        	    band.fromJSONObject(bandJson);
+        	    return band;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 	
 	public static List<Band> all() {
-	    //TODO stub
-	    return new ArrayList<Band>();
+	    try {
+	        CommService comm = new CommService();
+	        JSONArray jsonBands = comm.getJSONArray(CommService.API_BASE+"/bands");
+	        List<Band> bands = new ArrayList<Band>(jsonBands.length());
+	        for (int i=0; i < jsonBands.length(); i++) {
+	            JSONObject jsonBand = jsonBands.getJSONObject(i);
+	            Band band = new Band("");
+	            band.fromJSONObject(jsonBand);
+	            bands.add(band);
+	        }
+	        return bands;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return new ArrayList<Band>();
+	    }
 	}
 	
-	void fromJSONObject(JSONObject json) {
-	    //TODO stub
-	}
-	
-	JSONObject toJSONObject() {
-	    //TODO stub
-	    return null;
-	    
+	void fromJSONObject(JSONObject json) throws JSONException {
+	    this.id = json.getString("id");
+	    this.name = json.getString("name");
+	    //TODO players
 	}
 }
