@@ -1,5 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewSwitcher1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -8,73 +9,68 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MenuActivity" >
 
-    <ViewSwitcher
-        android:id="@+id/viewSwitcher1"
+    <RelativeLayout
+        android:id="@+id/usernameForm"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignParentTop="true" >
+        android:layout_height="match_parent" >
 
-        <RelativeLayout
-            android:id="@+id/usernameForm"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="108dp"
+            android:text="Set your username"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="108dp"
-                android:text="Set your username"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+        <EditText
+            android:id="@+id/usernameField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="28dp"
+            android:ems="10"
+            android:singleLine="true" >
 
-            <EditText
-                android:id="@+id/usernameField"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView1"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="28dp"
-                android:ems="10" >
+            <requestFocus />
+        </EditText>
 
-                <requestFocus />
-            </EditText>
+        <Button
+            android:id="@+id/usernameButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/usernameField"
+            android:layout_below="@+id/usernameField"
+            android:layout_marginTop="34dp"
+            android:onClick="pickUsername"
+            android:text="Next" />
+    </RelativeLayout>
 
-            <Button
-                android:id="@+id/usernameButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/usernameField"
-                android:layout_below="@+id/usernameField"
-                android:layout_marginTop="34dp"
-                android:text="Next" />
-        </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/mainMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-        <RelativeLayout
-            android:id="@+id/mainMenu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+        <Button
+            android:id="@+id/startBand"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/joinBand"
+            android:layout_alignRight="@+id/joinBand"
+            android:layout_marginBottom="24dp"
+            android:onClick="joinBand"
+            android:text="Start a band" />
 
-            <Button
-                android:id="@+id/joinBand"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="Join a band" />
+        <Button
+            android:id="@+id/joinBand"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:onClick="joinBand"
+            android:text="Join a band" />
 
-            <Button
-                android:id="@+id/startBand"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/joinBand"
-                android:layout_alignRight="@+id/joinBand"
-                android:layout_marginBottom="24dp"
-                android:text="Start a band" />
-
-        </RelativeLayout>
-    </ViewSwitcher>
-
-</RelativeLayout>
+    </RelativeLayout>
+</ViewSwitcher>
