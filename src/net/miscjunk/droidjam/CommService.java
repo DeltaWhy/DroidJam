@@ -33,8 +33,44 @@ public class CommService {
         Log.d("JSON",o.toString());
      */
 
-    public JSONObject getJSON(String url){
-        String jsonString = getString(url);
+	public JSONObject getJSON(String url){
+		 StringBuilder builder = new StringBuilder();
+		    HttpClient client = new DefaultHttpClient();
+		    HttpGet httpGet = new HttpGet(url);
+		    try {
+		      HttpResponse response = client.execute(httpGet);
+		      StatusLine statusLine = response.getStatusLine();
+		      int statusCode = statusLine.getStatusCode();
+		      if (statusCode == 200) {
+		        HttpEntity entity = response.getEntity();
+		        InputStream content = entity.getContent();
+		        BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+		        String line;
+		        while ((line = reader.readLine()) != null) {
+		          builder.append(line);
+		        }
+		      } else {
+		        //Log.e(ParseJSON.class.toString(), "Failed to download file");
+		      }
+		    } catch (ClientProtocolException e) {
+		      e.printStackTrace();
+		    } catch (IOException e) {
+		      e.printStackTrace();
+		    }
+		    JSONObject jObject = new JSONObject();
+		    try {
+				jObject = new JSONObject(builder.toString());				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    return jObject;
+		  }
+	
+	public String postJSON(String url, JSONObject jObject) throws Exception 
+	{
+	    //instantiates httpclient to make request
+	    DefaultHttpClient httpclient = new DefaultHttpClient();
 
         JSONObject jObject = null;
         if (jsonString != null) {
