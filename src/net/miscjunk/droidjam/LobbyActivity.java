@@ -42,7 +42,6 @@ public class LobbyActivity extends Activity implements Observer {
 		
 		setContentView(R.layout.activity_lobby);
 		
-		// TODO get band and set player index
 		Bundle params = getIntent().getExtras();
 		if (params == null) {
 		    Log.e("LobbyActivity","Can't be launched without bandId!");
@@ -54,6 +53,11 @@ public class LobbyActivity extends Activity implements Observer {
 		if (band == null) {
 		    Toast.makeText(this, "Network error.", Toast.LENGTH_LONG).show();
 		    return;
+		}
+		
+		for (int i = 0; i < Band.NUM_PLAYERS; i++) {
+			if (player.equals(band.getPlayers()[i]))
+				playerIndex = i;
 		}
 		
 		band.addObserver(this);
