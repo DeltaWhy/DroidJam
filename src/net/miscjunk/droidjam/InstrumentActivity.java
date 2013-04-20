@@ -30,12 +30,10 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_instrument);
         layout = (ViewGroup)findViewById(R.id.instrumentLayout);
-        //TODO dynamically load an InstrumentView
-        //TODO dynamically load sound samples
-        instrumentView = new DrumView(this);
+        instrumentView = InstrumentFactory.makeInstrumentView(this, "drums");
         instrumentView.setNoteListener(this);
         layout.addView(instrumentView);
-        sound = new DrumsSound(this);
+        sound = InstrumentFactory.makeInstrumentSound(this, "drums");
         midi = new MidiCreator(this, "/storage/sdcard0/droidjam"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())+".mid");
         midi.beginRecording();
     }
