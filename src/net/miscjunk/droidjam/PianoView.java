@@ -46,7 +46,7 @@ public class PianoView extends InstrumentView {
 		}
 		for (int i = 0; i < 9; i++) {
 			int keycenter = (width / 10) * (i + 1);
-			int keywidth = keycenter / 2;
+			int keywidth = width / 20;
 			int left = keycenter - keywidth / 2;
 			int right = keycenter + keywidth / 2;
 			int top = height / 3 - 1;
@@ -58,11 +58,67 @@ public class PianoView extends InstrumentView {
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {
+		int note = 0;
+		int noteIndex = 0;
+		boolean white = false;
 		int x = event.AXIS_X;
 		int y = event.AXIS_Y;
-		if (y > width / 3 && y < width * 2 / 3) {
-			x - 3 * width / 40
+		if (y > height / 3 && y < height * 2 / 3) {
+			int q = (x - 3 * width / 40) / (width / 20);
+			switch(q) {
+			case 0:
+				note = 61;
+				noteIndex = 0;
+				break;
+			case 2:
+				note = 63;
+				noteIndex = 1;
+				break;
+			case 6:
+				note = 66;
+				noteIndex = 2;
+				break;
+			case 8:
+				note = 68;
+				noteIndex = 3;
+				break;
+			case 10:
+				note = 70;
+				noteIndex = 4;
+				break;
+			case 14:
+				note = 73;
+				noteIndex = 5;
+				break;
+			case 16:
+				note = 75;
+				noteIndex = 6;
+				break;
+			}
+		} else if (y > height / 3) {
+			noteIndex = x / (width / 10);
+			note = 60 + 2 * noteIndex;
+			if (noteIndex > 2)
+				note--;
+			if (noteIndex > 6)
+				note--;
+			white = true;
 		}
+		
+		if (note > 0) {
+			boolean pressed = false;
+			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+				noteOn(note);
+				pressed = true;
+			} else {
+				noteOff(note);
+			}
+			if (white)
+				whiteKeys[noteIndex] = pressed;
+			else
+				blackKeys[noteIndex] = pressed;
+		}
+		
 		return true;
 	}
 
