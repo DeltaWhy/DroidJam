@@ -60,4 +60,10 @@ public class MenuActivity extends Activity {
         Intent intent = new Intent(this, JoinBandActivity.class);
         startActivity(intent);
     }
+    
+    public void practice(View v) {
+        Intent intent = new Intent(this, PracticeActivity.class);
+        startActivity(intent);
+    	
+    }
 }
