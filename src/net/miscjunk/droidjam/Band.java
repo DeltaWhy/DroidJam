@@ -35,6 +35,11 @@ public class Band extends Observable {
 		players[0] = host;
 	}
 	
+	public Band(String name) {
+	    this.name = name;
+	    players = new Player[NUM_PLAYERS];
+	}
+	
 	public void addPlayer(Player player) {
 		int i = 0;
 		while (i < players.length && players[i] != null) {

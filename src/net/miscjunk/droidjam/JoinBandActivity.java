@@ -1,6 +1,8 @@
 package net.miscjunk.droidjam;
 
 import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
@@ -10,22 +12,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class JoinBandActivity extends Activity implements AdapterView.OnItemClickListener {
-    ListView bandList;
-    
+public class JoinBandActivity extends ListActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_band);
         setupActionBar();
-        bandList = (ListView)findViewById(R.id.bandList);
-        Band bands[] = new Band[3];
-        bands[0] = new Band(new Player("DeltaWhy"));
-        bands[1] = new Band(new Player("atommarvel"));
-        bands[2] = new Band(new Player("roaclark"));
-        BandAdapter adapter = new BandAdapter(this, android.R.layout.simple_list_item_1, bands);
-        bandList.setAdapter(adapter);
-        bandList.setOnItemClickListener(this);
+        BandAdapter adapter = new BandAdapter(this, android.R.layout.simple_list_item_1, Band.all());
+        setListAdapter(adapter);
     }
 
     /**
@@ -53,8 +47,13 @@ public class JoinBandActivity extends Activity implements AdapterView.OnItemClic
     }
     
     @Override
-    public void onItemClick(AdapterView l, View v, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         Band band = (Band)l.getAdapter().getItem(position);
-        Toast.makeText(this, band.getHost().getUsername(), Toast.LENGTH_SHORT).show();
+        String bandId = band.getId();
+        Intent intent = new Intent(this, LobbyActivity.class);
+        Bundle b = new Bundle();
+        b.putString("bandId", bandId);
+        intent.putExtras(b);
+        startActivity(intent);
     }
 }

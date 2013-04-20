@@ -5,11 +5,13 @@ import java.util.Observer;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LobbyActivity extends Activity implements Observer {
 	
@@ -22,7 +24,20 @@ public class LobbyActivity extends Activity implements Observer {
 		setContentView(R.layout.activity_lobby);
 		
 		// TODO get band and set player index
-		getBand();
+		Bundle params = getIntent().getExtras();
+		if (params == null) {
+		    Log.e("LobbyActivity","Can't be launched without bandId!");
+		    return;
+		}
+		
+		String bandId = params.getString("bandId");
+		band = Band.findById(bandId);
+		if (band == null) {
+		    Toast.makeText(this, "Network error.", Toast.LENGTH_LONG).show();
+		    return;
+		}
+		
+		band.addObserver(this);
 		setFields();
 	}
 
@@ -32,12 +47,7 @@ public class LobbyActivity extends Activity implements Observer {
 		getMenuInflater().inflate(R.menu.activity_lobby, menu);
 		return true;
 	}
-	
-	public void getBand() {
-		band = new Band(new Player("testUser"));
-		band.addObserver(this);
-	}
-	
+
 	public void setFields() {
 		Player[] players = band.getPlayers();
 		for (int i = 0; i < Band.NUM_PLAYERS; i++) {
