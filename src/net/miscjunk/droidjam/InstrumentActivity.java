@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -57,7 +58,9 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
         midi.finishRecording();
         
         CommService comm = new CommService();
-        comm.uploadFile(CommService.API_BASE+"/bands/"+bandId+"/players/"+playerId+"/upload.mid", filename);
+        String uploadUrl =CommService.API_BASE+"/bands/"+bandId+"/players/"+playerId+"/upload.mid";
+        Log.d("InstrumentActivity","uploading "+filename+ " at "+uploadUrl);
+        comm.uploadFile(uploadUrl, filename);
     }
     
     public void btnNoteOn(View v) {
