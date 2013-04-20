@@ -13,6 +13,14 @@ public class Player {
 	private final String username;
 	private Instrument instrument;
 	private boolean ready;
+	private String id;
+	
+	public void setId(String id){
+		this.id = id;
+	}
+	public String getId(){
+		return this.id;
+	}
 	
 	public Player(String username) {
 		this.username = username;

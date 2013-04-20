@@ -12,8 +12,6 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class CommService {
 
@@ -44,16 +42,7 @@ public class CommService {
 		    return builder.toString();
 		  }
 	
-	public JSONObject writeJSON() {
-		  JSONObject object = new JSONObject();
-//		  try {
-//		    object.put("name", "Jack Hack");
-//		    object.put("score", new Integer(200));
-//		    object.put("current", new Double(152.32));
-//		    object.put("nickname", "Hacker");
-//		  } catch (JSONException e) {
-//		    e.printStackTrace();
-//		  }
-		  return object;
-		} 
+	
+
+	
 }

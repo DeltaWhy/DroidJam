@@ -8,6 +8,22 @@ public class Band extends Observable {
 	
 	private Player[] players;
 	private Player host;
+	private String id;
+	private String name;
+	
+	public String getName(){
+		return this.name;
+	}
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public String getId(){
+		return this.id;
+	}
+	public void setId(String id){
+		this.id = id;
+	}
 	
 	public Band(Player host) {
 		this.host = host;
