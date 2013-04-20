@@ -1,5 +1,8 @@
 package net.miscjunk.droidjam;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -18,6 +21,7 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
     ViewGroup layout;
     InstrumentSound sound;
     InstrumentView instrumentView;
+    MidiCreator midi;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +36,14 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
         instrumentView.setNoteListener(this);
         layout.addView(instrumentView);
         sound = new SquareSound(this);
-        /*sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-        soundIds[69] = sp.load(this, R.raw.piano_a4, 1);*/
+        midi = new MidiCreator(this, "/storage/sdcard0/droidjam"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())+".mid");
+        midi.beginRecording();
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        midi.finishRecording();
     }
     
     public void btnNoteOn(View v) {
@@ -46,12 +56,7 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
     
     @Override
     public void noteOn(int note, int velocity) {
-        //TODO write to the MIDI file
-        /*if (soundIds[note] != -1) {
-            streamIds[note] = sp.play(soundIds[note], 1.0F, 1.0F, 1, -1, 1.0F);
-        } else {
-            Log.w(TAG, "tried to play unloaded note "+note);
-        }*/
+        midi.noteOn(note, velocity);
         sound.noteOn(note, velocity);
     }
     
@@ -62,6 +67,7 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
     
     @Override
     public void noteOff(int note) {
+        midi.noteOff(note);
         sound.noteOff(note);
     }
 }
