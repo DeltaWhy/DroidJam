@@ -53,7 +53,8 @@ public class MenuActivity extends Activity {
     }
     
     public void startBand(View v) {
-        Intent intent = new Intent(this, LobbyActivity.class);
+        //Intent intent = new Intent(this, LobbyActivity.class);
+        Intent intent = new Intent(this, InstrumentActivity.class);
         startActivity(intent);
     }
     
