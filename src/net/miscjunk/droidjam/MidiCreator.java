@@ -12,6 +12,7 @@ import com.leff.midi.event.NoteOff;
 import com.leff.midi.event.NoteOn;
 import com.leff.midi.event.meta.Tempo;
 import com.leff.midi.event.meta.TimeSignature;
+import com.leff.midi.util.MidiUtil;
 
 public class MidiCreator {
     protected Context context;
@@ -50,8 +51,9 @@ public class MidiCreator {
 
     protected long getTicks(){
         long elapsedMilliseconds =System.currentTimeMillis()-startTime;
-        elapsedMilliseconds = (long) (elapsedMilliseconds/2.604);
-        return elapsedMilliseconds;
+        //elapsedMilliseconds = (long) (elapsedMilliseconds/2.604);
+        //return elapsedMilliseconds;
+        return (long)(elapsedMilliseconds/(60000.0/(TEMPO*MidiFile.DEFAULT_RESOLUTION)));
     }
 
     public void finishRecording(){        		
