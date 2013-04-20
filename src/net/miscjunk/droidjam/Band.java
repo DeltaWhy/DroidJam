@@ -150,5 +150,6 @@ public class Band extends Observable {
 	            this.players[i] = player;
 	        }
 	    }
+	    notifyObservers();
 	}
 }
