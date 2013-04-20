@@ -57,8 +57,9 @@ public class LobbyActivity extends Activity implements Observer {
 	    		view.setText(current.getUsername());
 	    		CheckBox box = (CheckBox)findViewById(getResources().getIdentifier("CheckBox" + i, "id", getPackageName()));
 	    		box.setChecked(current.getReady());
+	    		ImageButton button = (ImageButton)findViewById(getResources().getIdentifier("InstrumentButton" + i, "id", getPackageName()));
+	    		changeImage(button, current.getInstrument());
 			}
-			// TODO set the button image
 		}
 		
 		ImageButton instrButton = (ImageButton)findViewById(getResources().getIdentifier("InstrumentButton" + playerIndex, "id", getPackageName()));
@@ -68,7 +69,8 @@ public class LobbyActivity extends Activity implements Observer {
 	public void instrumentToggle(View view) {
 		Player[] players = band.getPlayers();
 		players[playerIndex].toggleInstrument();
-		// TODO change button image
+		ImageButton instrButton = (ImageButton)findViewById(getResources().getIdentifier("InstrumentButton" + playerIndex, "id", getPackageName()));
+		changeImage(instrButton, players[playerIndex].getInstrument());
 		band.update();
 	}
 	
@@ -83,4 +85,13 @@ public class LobbyActivity extends Activity implements Observer {
 		setFields();
 	}
 
+	public void changeImage(ImageButton button, Player.Instrument instrument) {
+		if (instrument == Player.Instrument.KEYS) {
+			button.setImageResource(R.drawable.icon_keys);
+		} else if (instrument == Player.Instrument.DRUMS) {
+			button.setImageResource(R.drawable.icon_drums);
+		} else {
+			button.setImageResource(R.drawable.ic_launcher);
+		}
+	}
 }

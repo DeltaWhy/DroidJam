@@ -69,7 +69,7 @@ public class CommService {
 			}
 		    return jObject;
 		  }
-	
+
     public JSONArray getJSONArray(String url){
         String jsonString = getString(url);
 
