@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="19dp"
         android:layout_marginTop="21dp"
-        android:text=""
+        android:text="Waiting..."
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_alignLeft="@+id/Username0"
         android:layout_below="@+id/InstrumentButton0"
   		android:paddingTop="10dip"
-        android:text=""
+        android:text="Waiting..."
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -32,7 +32,7 @@
         android:layout_alignLeft="@+id/Username0"
         android:layout_below="@+id/InstrumentButton1"
   		android:paddingTop="10dip"
-        android:text=""
+        android:text="Waiting..."
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_alignLeft="@+id/Username0"
         android:layout_below="@+id/InstrumentButton2"
   		android:paddingTop="10dip"
-        android:text=""
+        android:text="Waiting..."
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <CheckBox

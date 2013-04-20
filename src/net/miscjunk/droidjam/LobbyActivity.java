@@ -63,7 +63,7 @@ public class LobbyActivity extends Activity implements Observer {
 		}
 		
 		ImageButton instrButton = (ImageButton)findViewById(getResources().getIdentifier("InstrumentButton" + playerIndex, "id", getPackageName()));
-		instrButton.setClickable(true);
+//		instrButton.setClickable(true);
 	}
 	
 	public void instrumentToggle(View v) {
@@ -75,7 +75,7 @@ public class LobbyActivity extends Activity implements Observer {
 	}
 	
 	public void readyToggle(View v) {
-		Player current =  band.getPlayers()[playerIndex];
+		Player current = band.getPlayers()[playerIndex];
 		CheckBox checkBox = (CheckBox)findViewById(getResources().getIdentifier("CheckBox" + playerIndex, "id", getPackageName()));
 		checkBox.setChecked(current.toggleReady());
 		band.update();
