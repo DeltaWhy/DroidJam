@@ -66,23 +66,6 @@ public class CommService {
 			}
 		    return jObject;
 		  }
-	
-	public String postJSON(String url, JSONObject jObject) throws Exception 
-	{
-	    //instantiates httpclient to make request
-	    DefaultHttpClient httpclient = new DefaultHttpClient();
-
-        JSONObject jObject = null;
-        if (jsonString != null) {
-            try {
-                jObject = new JSONObject(jsonString);				
-            } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        return jObject;
-    }
 
     public JSONArray getJSONArray(String url){
         String jsonString = getString(url);
