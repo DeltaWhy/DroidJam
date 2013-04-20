@@ -12,6 +12,7 @@ public class PianoView extends InstrumentView {
 
 	private boolean[] whiteKeys;
 	private boolean[] blackKeys;
+	private int[] notesHeld;
 	int width;
 	int height;
 	
@@ -19,6 +20,7 @@ public class PianoView extends InstrumentView {
         super(context);
     	whiteKeys = new boolean[10];
     	blackKeys = new boolean[7];
+    	notesHeld = new int[4];
     }
 
     public PianoView(Context context, AttributeSet attribs) {
@@ -62,13 +64,13 @@ public class PianoView extends InstrumentView {
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {
-	    if (event.getActionMasked() != MotionEvent.ACTION_DOWN && event.getActionMasked() != MotionEvent.ACTION_UP) return true;
-		int note = 0;
+	    if (!(event.getActionMasked() == MotionEvent.ACTION_DOWN || event.getActionMasked() == MotionEvent.ACTION_UP
+	    		|| event.getActionMasked() == MotionEvent.ACTION_MOVE)) return true;
+		int note = -1;
 		int noteIndex = 0;
 		boolean white = false;
 		int x = (int)event.getRawX();
 		int y = (int)event.getRawY();
-	    Log.d("PianoView","touchevent x="+x + " y="+y);
 		if (y > height / 3 && y < height * 2 / 3) {
 			int q = (x - 3 * width / 40) / (width / 20);
 			switch(q) {
@@ -101,7 +103,8 @@ public class PianoView extends InstrumentView {
 				noteIndex = 6;
 				break;
 			}
-		} else if (y > height / 3) {
+		}
+		if (note == -1 && y > height / 3) {
 			noteIndex = x / (width / 10);
 			note = 60 + 2 * noteIndex;
 			if (noteIndex > 2)
@@ -111,13 +114,27 @@ public class PianoView extends InstrumentView {
 			white = true;
 		}
 		
-		if (note > 0) {
+		if (note >= 0) {
 			boolean pressed = false;
 			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 				noteOn(note);
+				notesHeld[0] = note;
 				pressed = true;
 			} else if (event.getActionMasked() == MotionEvent.ACTION_UP) {
 				noteOff(note);
+				notesHeld[0] = -1;
+			} else if (event.getActionMasked() == MotionEvent.ACTION_MOVE) {
+				if (notesHeld[0] != note) {
+					int oldIndex = convertNoteIndexToKeyIndex(notesHeld[0]);
+					if (oldIndex >= 10)
+						whiteKeys[oldIndex - 10] = false;
+					else
+						blackKeys[oldIndex] = false;
+					noteOff(notesHeld[0]);
+					notesHeld[0] = note;
+					noteOn(notesHeld[0]);
+				}
+				pressed = true;
 			}
 			if (white)
 				whiteKeys[noteIndex] = pressed;
@@ -127,5 +144,45 @@ public class PianoView extends InstrumentView {
 		}
 		
 		return true;
+	}
+	
+	public int convertNoteIndexToKeyIndex(int keyIndex) {
+		switch(keyIndex) {
+		case 60:
+			return 10;
+		case 61:
+			return 0;
+		case 62:
+			return 11;
+		case 63:
+			return 1;
+		case 64:
+			return 12;
+		case 65:
+			return 13;
+		case 66:
+			return 2;
+		case 67:
+			return 14;
+		case 68:
+			return 3;
+		case 69:
+			return 15;
+		case 70:
+			return 4;
+		case 71:
+			return 16;
+		case 72:
+			return 17;
+		case 73:
+			return 5;
+		case 74:
+			return 18;
+		case 75:
+			return 6;
+		case 76:
+			return 19;
+		}
+		return 0;
 	}
 }
