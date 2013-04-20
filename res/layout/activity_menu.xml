@@ -60,7 +60,7 @@
             android:layout_above="@+id/joinBand"
             android:layout_alignRight="@+id/joinBand"
             android:layout_marginBottom="24dp"
-            android:onClick="joinBand"
+            android:onClick="startBand"
             android:text="Start a band" />
 
         <Button

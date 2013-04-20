@@ -28,6 +28,8 @@ public class MenuActivity extends Activity {
         usernameField = (EditText)findViewById(R.id.usernameField);
         
         usernameField.setText(username);
+        Intent i = new Intent(this, OneNoteSambaActivity.class);
+        startActivity(i);
     }
 
     @Override
@@ -53,7 +55,8 @@ public class MenuActivity extends Activity {
     }
     
     public void startBand(View v) {
-        Intent intent = new Intent(this, LobbyActivity.class);
+        //Intent intent = new Intent(this, LobbyActivity.class);
+        Intent intent = new Intent(this, InstrumentActivity.class);
         startActivity(intent);
     }
     

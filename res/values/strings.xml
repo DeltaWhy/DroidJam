@@ -7,5 +7,10 @@
     <string name="title_activity_lobby">LobbyActivity</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_join_band">JoinBandActivity</string>
+<<<<<<< HEAD
+    <string name="title_activity_one_note_samba">OneNoteSambaActivity</string>
+=======
+    <string name="title_activity_instrument">InstrumentActivity</string>
+>>>>>>> 6501837e31a6e4ace661b7ffef6feecbcbc3b6e9
 
 </resources>
