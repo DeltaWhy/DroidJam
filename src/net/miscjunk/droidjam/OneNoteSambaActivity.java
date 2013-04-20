@@ -1,5 +1,8 @@
 package net.miscjunk.droidjam;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -7,7 +10,7 @@ import android.view.Menu;
 import android.view.View;
 
 public class OneNoteSambaActivity extends Activity {
-	MidiCreator music = new MidiCreator();
+        MidiCreator music = new MidiCreator(this, "/storage/sdcard0/droidjam"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())+".mid");
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -22,7 +25,7 @@ public class OneNoteSambaActivity extends Activity {
 	}
 	
 	public void stop(View view){		
-		music.finishRecording(this);
+		music.finishRecording();
 	}
 	public void start(View view){		
 		music.beginRecording();	
