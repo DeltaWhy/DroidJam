@@ -87,9 +87,9 @@ public class LobbyActivity extends Activity implements Observer {
 
 	public void changeImage(ImageButton button, Player.Instrument instrument) {
 		if (instrument == Player.Instrument.KEYS) {
-			button.setImageResource(R.drawable.ic_launcher);
+			button.setImageResource(R.drawable.icon_keys);
 		} else if (instrument == Player.Instrument.DRUMS) {
-			button.setImageResource(R.drawable.ic_launcher);
+			button.setImageResource(R.drawable.icon_drums);
 		} else {
 			button.setImageResource(R.drawable.ic_launcher);
 		}
