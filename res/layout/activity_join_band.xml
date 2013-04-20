@@ -9,11 +9,16 @@
     tools:context=".JoinBandActivity" >
 
     <ListView
-        android:id="@+id/bandList"
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" >
     </ListView>
+    
+    <TextView android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No bands found." />
 
 </RelativeLayout>

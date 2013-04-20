@@ -52,14 +52,12 @@ public class MenuActivity extends Activity {
     }
     
     public void startBand(View v) {
-        //Intent intent = new Intent(this, LobbyActivity.class);
-        Intent intent = new Intent(this, InstrumentActivity.class);
+        Intent intent = new Intent(this, StartBandActivity.class);
         startActivity(intent);
     }
     
     public void joinBand(View v) {
-        //Intent intent = new Intent(this, JoinBandActivity.class);
-        Intent intent = new Intent(this, OneNoteSambaActivity.class);
+        Intent intent = new Intent(this, JoinBandActivity.class);
         startActivity(intent);
     }
 }

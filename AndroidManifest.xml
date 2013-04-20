@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="17" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -42,6 +43,14 @@
         <activity
             android:name="net.miscjunk.droidjam.InstrumentActivity"
             android:label="@string/title_activity_instrument"
+            android:parentActivityName="net.miscjunk.droidjam.MenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.miscjunk.droidjam.MenuActivity" />
+        </activity>
+        <activity
+            android:name="net.miscjunk.droidjam.StartBandActivity"
+            android:label="@string/title_activity_start_band"
             android:parentActivityName="net.miscjunk.droidjam.MenuActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
