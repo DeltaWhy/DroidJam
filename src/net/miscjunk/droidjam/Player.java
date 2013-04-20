@@ -1,5 +1,7 @@
 package net.miscjunk.droidjam;
 
+import org.json.JSONObject;
+
 public class Player {
 
 	public enum Instrument {
@@ -13,6 +15,15 @@ public class Player {
 	private final String username;
 	private Instrument instrument;
 	private boolean ready;
+	private String id;
+	private String bandId;
+	
+	public void setId(String id){
+		this.id = id;
+	}
+	public String getId(){
+		return this.id;
+	}
 	
 	public Player(String username) {
 		this.username = username;
@@ -49,7 +60,53 @@ public class Player {
 	}
 	
 	public boolean equals(Object o) {
-		return o instanceof Player && username.equals(((Player)o).username);
+		return o instanceof Player && id.equals(((Player)o).id);
 	}
-
+	
+	/*
+	 * Persistence
+	 */
+	public boolean create() {
+	    //TODO stub
+	    return false;
+	}
+	
+	public boolean reload() {
+	    //TODO stub
+	    return false;
+	}
+	
+	public static Player findById(String id) {
+	    //TODO stub
+	    return null;
+	}
+	
+	void fromJSONObject(JSONObject json) {
+	    //TODO stub
+	}
+	
+	JSONObject toJSONObject(boolean forBand) {
+	    //TODO stub
+	    return null;
+	    
+	}
+	
+	public boolean update() {
+	    //TODO stub
+	    return false;
+	}
+	
+	public boolean joinBand(Band band) {
+	    return joinBand(band.getId());
+	}
+	
+	public boolean joinBand(String bandId) {
+	    //TODO stub
+	    return false;
+	}
+	
+	public boolean leaveBand() {
+	    //TODO stub
+	    return false;
+	}
 }

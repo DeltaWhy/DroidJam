@@ -1,6 +1,10 @@
 package net.miscjunk.droidjam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
+
+import org.json.JSONObject;
 
 public class Band extends Observable {
 
@@ -8,6 +12,22 @@ public class Band extends Observable {
 	
 	private Player[] players;
 	private Player host;
+	private String id;
+	private String name;
+	
+	public String getName(){
+		return this.name;
+	}
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public String getId(){
+		return this.id;
+	}
+	public void setId(String id){
+		this.id = id;
+	}
 	
 	public Band(Player host) {
 		this.host = host;
@@ -55,6 +75,39 @@ public class Band extends Observable {
 	}
 
 	public String toString() {
-	    return "a band by " + host.getUsername();
+	    return getName();
+	}
+	
+	/*
+	 * Persistence
+	 */
+	public boolean create() {
+	    //TODO stub
+	    return false;
+	}
+	
+	public boolean reload() {
+	    //TODO stub
+	    return false;
+	}
+	
+	public static Band findById(String id) {
+	    //TODO stub
+	    return null;
+	}
+	
+	public static List<Band> all() {
+	    //TODO stub
+	    return new ArrayList<Band>();
+	}
+	
+	void fromJSONObject(JSONObject json) {
+	    //TODO stub
+	}
+	
+	JSONObject toJSONObject() {
+	    //TODO stub
+	    return null;
+	    
 	}
 }
