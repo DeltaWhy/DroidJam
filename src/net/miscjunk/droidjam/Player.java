@@ -1,5 +1,6 @@
 package net.miscjunk.droidjam;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Player {
@@ -12,7 +13,7 @@ public class Player {
 		}
 	}
 	
-	private final String username;
+	private String username;
 	private Instrument instrument;
 	private boolean ready;
 	private String id;
@@ -67,25 +68,65 @@ public class Player {
 	 * Persistence
 	 */
 	public boolean create() {
-	    //TODO stub
-	    return false;
+	    try {
+        	    CommService comm = new CommService();
+        	    JSONObject jRequest = new JSONObject();
+        	    jRequest.put("name", username);
+        	    JSONObject playerJson = comm.postJSON(CommService.API_BASE+"/players", jRequest);
+        	    fromJSONObject(playerJson);
+        	    return true;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 	
 	public boolean reload() {
-	    //TODO stub
-	    return false;
+	    try {
+        	    CommService comm = new CommService();
+        	    JSONObject playerJson = comm.getJSON(CommService.API_BASE+"/players/"+id);
+        	    fromJSONObject(playerJson);
+        	    return true;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 	
 	public static Player findById(String id) {
-	    //TODO stub
-	    return null;
+	    CommService comm = new CommService();
+	    JSONObject playerJson = comm.getJSON(CommService.API_BASE+"/players/"+id);
+	    Player player = new Player("");
+	    try {
+        	    player.fromJSONObject(playerJson);
+        	    return player;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 	
-	void fromJSONObject(JSONObject json) {
-	    //TODO stub
+	void fromJSONObject(JSONObject json) throws JSONException {
+	    id = json.getString("id");
+	    username = json.getString("name");
+	    if (json.has("instrument")) {
+	        String inst = json.getString("instrument");
+	        if (inst.equals("keys")) {
+	            instrument = Instrument.KEYS;
+	        } else if (inst.equals("drums")) {
+	            instrument = Instrument.DRUMS;
+	        } else if (inst.equals("null")) {
+	            instrument = null;
+	        } else {
+	            throw new JSONException("Unknown instrument "+inst);
+	        }
+	    }
+	    if (json.has("ready")) {
+	        ready = json.getBoolean("ready");
+	    }
 	}
 	
-	JSONObject toJSONObject(boolean forBand) {
+	JSONObject toJSONObject(boolean forBand) throws JSONException {
 	    //TODO stub
 	    return null;
 	    

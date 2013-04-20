@@ -13,7 +13,6 @@ public class Band extends Observable {
 	public static final int NUM_PLAYERS = 4;
 	
 	private Player[] players;
-	private Player host;
 	private String id;
 	private String name;
 	
@@ -29,12 +28,6 @@ public class Band extends Observable {
 	}
 	public void setId(String id){
 		this.id = id;
-	}
-	
-	public Band(Player host) {
-		this.host = host;
-		players = new Player[NUM_PLAYERS];
-		players[0] = host;
 	}
 	
 	public Band(String name) {
@@ -69,7 +62,7 @@ public class Band extends Observable {
 	}
 	
 	public Player getHost() {
-	    return host;
+	    return players[0];
 	}
 	
 	public Player[] getPlayers() {
@@ -148,6 +141,14 @@ public class Band extends Observable {
 	void fromJSONObject(JSONObject json) throws JSONException {
 	    this.id = json.getString("id");
 	    this.name = json.getString("name");
-	    //TODO players
+	    if (json.has("players")) {
+	        JSONArray jsonPlayers = json.getJSONArray("players");
+	        for (int i=0; i < jsonPlayers.length(); i++) {
+	            JSONObject jsonPlayer = jsonPlayers.getJSONObject(i);
+	            Player player = new Player("");
+	            player.fromJSONObject(jsonPlayer);
+	            this.players[i] = player;
+	        }
+	    }
 	}
 }
