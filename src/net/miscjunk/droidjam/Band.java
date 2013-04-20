@@ -24,8 +24,15 @@ public class Band {
 		players[i] = player;
 	}
 	
+	public Player getHost() {
+	    return host;
+	}
+	
 	public Player[] getPlayers() {
 		return players;
 	}
 
+	public String toString() {
+	    return "a band by " + host.getUsername();
+	}
 }
