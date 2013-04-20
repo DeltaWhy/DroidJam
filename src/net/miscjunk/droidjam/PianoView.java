@@ -18,7 +18,7 @@ public class PianoView extends InstrumentView {
 	public PianoView(Context context) {
         super(context);
     	whiteKeys = new boolean[10];
-    	blackKeys = new boolean[9];
+    	blackKeys = new boolean[7];
     }
 
     public PianoView(Context context, AttributeSet attribs) {
@@ -45,16 +45,19 @@ public class PianoView extends InstrumentView {
 			int bottom = height - 1;
 			c.drawRect(new Rect(left, top, right, bottom), whiteKeys[i] ? lgtgrayPaint : whitePaint);
 		}
-		for (int i = 0; i < 9; i++) {
-			int keycenter = (width / 10) * (i + 1);
+		for (int i = 0; i < 7; i++) {
+			int adjustedIndex = i;
+			if (i > 1)
+				adjustedIndex++;
+			if (i > 4)
+				adjustedIndex++;
+			int keycenter = (width / 10) * (adjustedIndex + 1);
 			int keywidth = width / 20;
 			int left = keycenter - keywidth / 2;
 			int right = keycenter + keywidth / 2;
 			int top = height / 3 - 1;
 			int bottom = height * 2 / 3 - 1;
-			if (i != 2 && i != 6) {
-				c.drawRect(new Rect(left, top, right, bottom), blackKeys[i] ? blackPaint : drkgrayPaint);
-			}
+			c.drawRect(new Rect(left, top, right, bottom), blackKeys[i] ? blackPaint : drkgrayPaint);
 		}
 	}
 	
