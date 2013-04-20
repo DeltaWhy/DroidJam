@@ -103,7 +103,7 @@ public class LobbyActivity extends Activity implements Observer {
 		}
 		
 		ImageButton instrButton = (ImageButton)findViewById(getResources().getIdentifier("InstrumentButton" + playerIndex, "id", getPackageName()));
-//		instrButton.setClickable(true);
+		instrButton.setClickable(true);
 	}
 	
 	public void instrumentToggle(View v) {
