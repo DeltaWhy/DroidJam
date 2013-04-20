@@ -126,7 +126,7 @@
         android:onClick="instrumentToggle" />
 
     <Button
-        android:id="@+id/readyButton"
+        android:id="@+id/drumStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -136,12 +136,12 @@
         android:onClick="startDrums" />
     
     <Button
-        android:id="@+id/readyButton"
+        android:id="@+id/pianoStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_above="@+id/drumStart"
         android:text="Piano"
         android:onClick="startPiano" />
     
