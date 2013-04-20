@@ -6,22 +6,23 @@
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="26dp"
-        android:text="Keys"
-        android:onClick="practiceKeys" />
+        android:onClick="practiceKeys"
+        android:text="Keys" />
 
     <Button
         android:id="@+id/Button01"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
-        android:text="Drums"
-        android:onClick="practiceDrums" />
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="26dp"
+        android:onClick="practiceDrums"
+        android:text="Drums" />
 
 </RelativeLayout>
