@@ -4,10 +4,15 @@ public class Player {
 
 	public enum Instrument {
 		KEYS, GUITAR, BASS, DRUMS;
+		
+		public Instrument next() {
+		    return values()[ordinal() + 1 % values().length];
+		}
 	}
 	
 	private final String username;
 	private Instrument instrument;
+	private boolean ready;
 	
 	public Player(String username) {
 		this.username = username;
@@ -22,8 +27,20 @@ public class Player {
 		return instrument;
 	}
 	
+	public void setReady(boolean ready) {
+		this.ready = ready;
+	}
+	
+	public boolean getReady() {
+		return ready;
+	}
+	
 	public String getUsername() {
 		return username;
+	}
+	
+	public void toggleInstrument() {
+		instrument = instrument.next();
 	}
 
 }

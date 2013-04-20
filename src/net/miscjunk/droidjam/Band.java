@@ -23,5 +23,9 @@ public class Band {
 			return;
 		players[i] = player;
 	}
+	
+	public Player[] getPlayers() {
+		return players;
+	}
 
 }
