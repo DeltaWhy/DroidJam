@@ -75,9 +75,9 @@ public class DrumView extends InstrumentView {
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {
-		int x = (int)event.getRawX();
-		int y = (int)event.getRawY();
-		if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+		int x = (int)event.getX(event.getActionIndex());
+		int y = (int)event.getY(event.getActionIndex());
+		if (event.getActionMasked() == MotionEvent.ACTION_POINTER_DOWN || event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 			int type = -1;
 			if (intersect(x, y, bassCenter.x, bassCenter.y, largeRadius)) {
 				type = BASS;
