@@ -132,7 +132,17 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="Ready"
-        android:onClick="readyToggle" />
+        android:text="Drums"
+        android:onClick="startDrums" />
+    
+    <Button
+        android:id="@+id/readyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:text="Piano"
+        android:onClick="startPiano" />
     
 </RelativeLayout>

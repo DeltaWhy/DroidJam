@@ -39,6 +39,7 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
         sound = InstrumentFactory.makeInstrumentSound(this, instrument);
         midi = new MidiCreator(this, "/storage/sdcard0/droidjam"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())+".mid");
         midi.beginRecording();
+        recording = true;
         if (extras != null)
         	recording = extras.getBoolean("recording", true);
     }

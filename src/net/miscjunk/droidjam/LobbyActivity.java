@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -137,5 +138,17 @@ public class LobbyActivity extends Activity implements Observer {
 		} else {
 			button.setImageResource(R.drawable.ic_launcher);
 		}
+	}
+	
+	public void startDrums(View v) {
+		Intent intent = new Intent(this, InstrumentActivity.class);
+		intent.putExtra("instrument", "drums");
+		startActivity(intent);
+	}
+	
+	public void startPiano(View v) {
+		Intent intent = new Intent(this, InstrumentActivity.class);
+		intent.putExtra("instrument", "keys");
+		startActivity(intent);
 	}
 }
