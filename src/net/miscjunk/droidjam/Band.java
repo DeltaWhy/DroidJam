@@ -1,6 +1,10 @@
 package net.miscjunk.droidjam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
+
+import org.json.JSONObject;
 
 public class Band extends Observable {
 
@@ -71,6 +75,39 @@ public class Band extends Observable {
 	}
 
 	public String toString() {
-	    return "a band by " + host.getUsername();
+	    return getName();
+	}
+	
+	/*
+	 * Persistence
+	 */
+	public boolean create() {
+	    //TODO stub
+	    return false;
+	}
+	
+	public boolean reload() {
+	    //TODO stub
+	    return false;
+	}
+	
+	public static Band findById(String id) {
+	    //TODO stub
+	    return null;
+	}
+	
+	public static List<Band> all() {
+	    //TODO stub
+	    return new ArrayList<Band>();
+	}
+	
+	void fromJSONObject(JSONObject json) {
+	    //TODO stub
+	}
+	
+	JSONObject toJSONObject() {
+	    //TODO stub
+	    return null;
+	    
 	}
 }
