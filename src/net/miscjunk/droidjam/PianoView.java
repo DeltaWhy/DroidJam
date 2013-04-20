@@ -117,9 +117,9 @@ public class PianoView extends InstrumentView {
 				whiteKeys[noteIndex] = pressed;
 			else
 				blackKeys[noteIndex] = pressed;
+			invalidate();
 		}
 		
 		return true;
 	}
-
 }
