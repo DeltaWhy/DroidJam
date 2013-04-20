@@ -1,6 +1,8 @@
 package net.miscjunk.droidjam;
 
-public class Band {
+import java.util.Observable;
+
+public class Band extends Observable {
 
 	public static final int NUM_PLAYERS = 4;
 	
@@ -22,6 +24,21 @@ public class Band {
 		if (i == players.length)
 			return;
 		players[i] = player;
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void removePlayer(Player player) {
+		int i = 0;
+		while (i < players.length && !players[i].equals(player)) {
+			i++;
+		}
+		
+		if (i == players.length)
+			return;
+		players[i] = player;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Player getHost() {
@@ -30,6 +47,11 @@ public class Band {
 	
 	public Player[] getPlayers() {
 		return players;
+	}
+	
+	public void update() {
+		setChanged();
+		notifyObservers();
 	}
 
 	public String toString() {

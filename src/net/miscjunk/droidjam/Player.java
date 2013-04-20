@@ -35,12 +35,21 @@ public class Player {
 		return ready;
 	}
 	
+	public boolean toggleReady() {
+		ready = !ready;
+		return ready;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
 	
 	public void toggleInstrument() {
 		instrument = instrument.next();
+	}
+	
+	public boolean equals(Object o) {
+		return o instanceof Player && username.equals(((Player)o).username);
 	}
 
 }

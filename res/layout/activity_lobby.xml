@@ -91,7 +91,7 @@
         android:src="@android:drawable/btn_star"
         android:layout_alignParentRight="true"
         android:clickable="false"
-        android:onClick="toggle" />
+        android:onClick="instrumentToggle" />
 
     <ImageButton
         android:id="@+id/InstrumentButton1"
@@ -101,7 +101,7 @@
         android:layout_alignTop="@+id/Username2"
         android:src="@android:drawable/btn_star"
         android:clickable="false"
-        android:onClick="toggle" />
+        android:onClick="instrumentToggle" />
 
     <ImageButton
         android:id="@+id/InstrumentButton2"
@@ -111,7 +111,7 @@
         android:layout_alignTop="@+id/Username3"
         android:src="@android:drawable/btn_star"
         android:clickable="false"
-        android:onClick="toggle" />
+        android:onClick="instrumentToggle" />
 
     <ImageButton
         android:id="@+id/InstrumentButton3"
@@ -121,7 +121,7 @@
         android:layout_alignTop="@+id/Username4"
         android:src="@android:drawable/btn_star"
         android:clickable="false"
-        android:onClick="toggle" />
+        android:onClick="instrumentToggle" />
 
     <Button
         android:id="@+id/readyButton"
@@ -130,6 +130,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:text="Ready" />
+        android:text="Ready"
+        android:onClick="readyToggle" />
 
 </RelativeLayout>
