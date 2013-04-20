@@ -70,6 +70,8 @@ public class LobbyActivity extends Activity implements Observer {
 	    super.onResume();
 	    if (!player.joinBand(band)) {
 	        Toast.makeText(this, "Network error.", Toast.LENGTH_LONG).show();
+	    } else {
+	        band.reload();
 	    }
 	}
 	
@@ -78,6 +80,8 @@ public class LobbyActivity extends Activity implements Observer {
 	    super.onPause();
 	    if (!player.leaveBand()) {
 	        Toast.makeText(this, "Network error.", Toast.LENGTH_LONG).show();
+	    } else {
+	        band.reload();
 	    }
 	}
 
