@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 
 public class PianoView extends InstrumentView {
@@ -17,7 +18,7 @@ public class PianoView extends InstrumentView {
 	public PianoView(Context context) {
         super(context);
     	whiteKeys = new boolean[10];
-    	blackKeys = new boolean[7];
+    	blackKeys = new boolean[9];
     }
 
     public PianoView(Context context, AttributeSet attribs) {
@@ -32,7 +33,7 @@ public class PianoView extends InstrumentView {
 		Paint whitePaint = new Paint();
 		whitePaint.setARGB(255, 255, 255, 255);
 		Paint drkgrayPaint = new Paint();
-		drkgrayPaint.setARGB(255, 20, 20, 20);
+		drkgrayPaint.setARGB(255, 50, 50, 50);
 		Paint lgtgrayPaint = new Paint();
 		lgtgrayPaint.setARGB(255, 170, 170, 170);
 		c.drawPaint(blackPaint);
@@ -42,7 +43,7 @@ public class PianoView extends InstrumentView {
 			int right = (i + 1) * keywidth - 1;
 			int top = height / 3 - 1;
 			int bottom = height - 1;
-			c.drawRect(new Rect(left, top, right, bottom), whiteKeys[i] ? whitePaint : lgtgrayPaint);
+			c.drawRect(new Rect(left, top, right, bottom), whiteKeys[i] ? lgtgrayPaint : whitePaint);
 		}
 		for (int i = 0; i < 9; i++) {
 			int keycenter = (width / 10) * (i + 1);
@@ -52,17 +53,19 @@ public class PianoView extends InstrumentView {
 			int top = height / 3 - 1;
 			int bottom = height * 2 / 3 - 1;
 			if (i != 2 && i != 6) {
-				c.drawRect(new Rect(left, top, right, bottom), blackKeys[i] ? drkgrayPaint : blackPaint);
+				c.drawRect(new Rect(left, top, right, bottom), blackKeys[i] ? blackPaint : drkgrayPaint);
 			}
 		}
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {
+	    if (event.getActionMasked() != MotionEvent.ACTION_DOWN && event.getActionMasked() != MotionEvent.ACTION_UP) return true;
 		int note = 0;
 		int noteIndex = 0;
 		boolean white = false;
-		int x = event.AXIS_X;
-		int y = event.AXIS_Y;
+		int x = (int)event.getRawX();
+		int y = (int)event.getRawY();
+	    Log.d("PianoView","touchevent x="+x + " y="+y);
 		if (y > height / 3 && y < height * 2 / 3) {
 			int q = (x - 3 * width / 40) / (width / 20);
 			switch(q) {
@@ -110,7 +113,7 @@ public class PianoView extends InstrumentView {
 			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 				noteOn(note);
 				pressed = true;
-			} else {
+			} else if (event.getActionMasked() == MotionEvent.ACTION_UP) {
 				noteOff(note);
 			}
 			if (white)
