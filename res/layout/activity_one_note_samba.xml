@@ -16,9 +16,8 @@
         android:layout_alignBottom="@+id/Button01"
         android:layout_marginLeft="17dp"
         android:layout_toRightOf="@+id/button1"
-        android:text="Stop" 
-        android:onClick="stop"/>
-    
+        android:onClick="stop"
+        android:text="Stop" />
 
     <Button
         android:id="@+id/Button01"
@@ -28,17 +27,8 @@
         android:layout_marginRight="14dp"
         android:layout_marginTop="66dp"
         android:layout_toLeftOf="@+id/button1"
-        android:text="Start" 
-        android:onClick="start"/>
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="NOTEON" 
-        android:onClick="noteon"/>
+        android:onClick="start"
+        android:text="Start" />
 
     <Button
         android:id="@+id/Button03"
@@ -47,7 +37,37 @@
         android:layout_below="@+id/button1"
         android:layout_marginTop="17dp"
         android:layout_toLeftOf="@+id/Button02"
-        android:text="NOTEOFF" 
-        android:onClick="noteoff"/>
+        android:onClick="noteoff"
+        android:text="NOTEOFF" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Button02"
+        android:layout_alignBottom="@+id/Button02"
+        android:layout_centerHorizontal="true"
+        android:onClick="noteon"
+        android:text="NOTEON" />
+
+    <Button
+        android:id="@+id/Button04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Button03"
+        android:layout_marginTop="59dp"
+        android:layout_toLeftOf="@+id/Button02"
+        android:onClick="noteon1"
+        android:text="NOTEON" />
+
+    <Button
+        android:id="@+id/Button05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Button04"
+        android:layout_below="@+id/Button04"
+        android:layout_marginTop="26dp"
+        android:onClick="noteoff1"
+        android:text="NOTEOFF" />
 
 </RelativeLayout>

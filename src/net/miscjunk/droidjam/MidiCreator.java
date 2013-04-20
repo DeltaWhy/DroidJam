@@ -21,6 +21,7 @@ public class MidiCreator {
     final int CHANNEL = 0;
     MidiTrack tempoTrack = new MidiTrack();
     MidiTrack noteTrack = new MidiTrack();
+    MidiTrack secondTrack = new MidiTrack();
     long startTime;
 
 
