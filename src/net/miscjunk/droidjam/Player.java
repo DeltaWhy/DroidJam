@@ -28,7 +28,7 @@ public class Player {
 	
 	public Player(String username) {
 		this.username = username;
-		instrument = null;
+		this.instrument = Instrument.KEYS;
 	}
 	
 	public void setInstrument(Instrument instrument) {

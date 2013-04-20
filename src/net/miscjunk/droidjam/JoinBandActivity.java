@@ -20,16 +20,8 @@ public class JoinBandActivity extends ListActivity{
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);  
         setContentView(R.layout.activity_join_band);
-        setupActionBar();
         BandAdapter adapter = new BandAdapter(this, android.R.layout.simple_list_item_1, Band.all());
         setListAdapter(adapter);
-    }
-
-    /**
-     * Set up the {@link android.app.ActionBar}.
-     */
-    private void setupActionBar() {
-        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
