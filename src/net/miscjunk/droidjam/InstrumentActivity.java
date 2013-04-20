@@ -18,6 +18,9 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
     InstrumentView instrumentView;
     MidiCreator midi;
     boolean recording;
+    String filename;
+    String bandId;
+    String playerId;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +32,19 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String instrument = null;
-        if (extras != null)
+        if (extras != null) {
         	instrument = extras.getString("instrument");
+            bandId = extras.getString("bandId");
+            playerId = extras.getString("playerId");
+        }
         if (instrument == null)
         	instrument = "keys";
         instrumentView = InstrumentFactory.makeInstrumentView(this, instrument);
         instrumentView.setNoteListener(this);
         layout.addView(instrumentView);
         sound = InstrumentFactory.makeInstrumentSound(this, instrument);
-        midi = new MidiCreator(this, "/storage/sdcard0/droidjam"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())+".mid");
+        filename = "/storage/sdcard0/droidjam"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())+".mid";
+        midi = new MidiCreator(this, filename);
         midi.beginRecording();
         recording = true;
         if (extras != null)
@@ -48,6 +55,9 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
     protected void onPause() {
         super.onPause();
         midi.finishRecording();
+        
+        CommService comm = new CommService();
+        comm.uploadFile(CommService.API_BASE+"/bands/"+bandId+"/players/"+playerId+"/upload.mid", filename);
     }
     
     public void btnNoteOn(View v) {

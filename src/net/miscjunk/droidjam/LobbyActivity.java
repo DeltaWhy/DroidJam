@@ -143,12 +143,16 @@ public class LobbyActivity extends Activity implements Observer {
 	public void startDrums(View v) {
 		Intent intent = new Intent(this, InstrumentActivity.class);
 		intent.putExtra("instrument", "drums");
+		intent.putExtra("bandId", band.getId());
+		intent.putExtra("playerId", player.getId());
 		startActivity(intent);
 	}
 	
 	public void startPiano(View v) {
 		Intent intent = new Intent(this, InstrumentActivity.class);
 		intent.putExtra("instrument", "keys");
+		intent.putExtra("bandId", band.getId());
+		intent.putExtra("playerId", player.getId());
 		startActivity(intent);
 	}
 }
