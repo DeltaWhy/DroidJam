@@ -41,6 +41,7 @@ public class Player {
 	
 	public void setReady(boolean ready) {
 		this.ready = ready;
+		update();
 	}
 	
 	public boolean getReady() {
@@ -48,7 +49,8 @@ public class Player {
 	}
 	
 	public boolean toggleReady() {
-		ready = !ready;
+		setReady(!ready);
+		update();
 		return ready;
 	}
 	
@@ -127,14 +129,39 @@ public class Player {
 	}
 	
 	JSONObject toJSONObject(boolean forBand) throws JSONException {
-	    //TODO stub
-	    return null;
-	    
+	    JSONObject json = new JSONObject();
+	    json.put("id", id);
+	    json.put("name", username);
+	    if (forBand) {
+	        String inst;
+	        switch (instrument) {
+	        case KEYS:
+	            inst = "keys";
+	            break;
+	        case DRUMS:
+	            inst = "drums";
+	            break;
+	        default:
+	            inst = null;
+	        }
+	        json.put("instrument", inst);
+	        
+	        json.put("ready", ready);
+	    }
+	    return json;
 	}
 	
 	public boolean update() {
-	    //TODO stub
-	    return false;
+	    try {
+	        CommService comm = new CommService();
+	        JSONObject jRequest = toJSONObject(true);
+	        JSONObject jResponse = comm.putJSON(CommService.API_BASE+"/players/"+id, jRequest);
+	        fromJSONObject(jResponse);
+	        return true;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 	
 	public boolean joinBand(Band band) {
@@ -142,12 +169,30 @@ public class Player {
 	}
 	
 	public boolean joinBand(String bandId) {
-	    //TODO stub
-	    return false;
+	    try {
+	        CommService comm = new CommService();
+	        JSONObject jRequest = new JSONObject();
+	        jRequest.put("player_id", id);
+	        JSONObject jResponse = comm.postJSON(CommService.API_BASE+"/bands/"+bandId+"/join", jRequest);
+	        fromJSONObject(jResponse);
+	        this.bandId = bandId;
+	        return true;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 	
 	public boolean leaveBand() {
-	    //TODO stub
-	    return false;
+	    try {
+	        CommService comm = new CommService();
+	        JSONObject jRequest = new JSONObject();
+	        jRequest.put("player_id", id);
+	        comm.postJSON(CommService.API_BASE+"/bands/"+bandId+"/leave", jRequest);
+	        return true;
+	    } catch (JSONException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 }

@@ -4,7 +4,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -15,12 +18,28 @@ import android.widget.Toast;
 
 public class LobbyActivity extends Activity implements Observer {
 	
+    private SharedPreferences prefs;
+    private Player player;
 	private Band band;
 	private int playerIndex;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);  
+		prefs = getSharedPreferences("DroidJam",Context.MODE_PRIVATE);
+		String playerId = prefs.getString("playerId", "");
+		if (playerId.isEmpty()) {
+		    Log.e("LobbyActivity","Can't be launched without playerId!");
+		    return;
+		}
+		player = Player.findById(playerId);
+		if (player == null) {
+		    Toast.makeText(this, "Network error.", Toast.LENGTH_LONG).show();
+		    return;
+		}
+		
 		setContentView(R.layout.activity_lobby);
 		
 		// TODO get band and set player index
@@ -38,7 +57,24 @@ public class LobbyActivity extends Activity implements Observer {
 		}
 		
 		band.addObserver(this);
+
 		setFields();
+	}
+	
+	@Override
+	protected void onResume() {
+	    super.onResume();
+	    if (!player.joinBand(band)) {
+	        Toast.makeText(this, "Network error.", Toast.LENGTH_LONG).show();
+	    }
+	}
+	
+	@Override
+	protected void onPause() {
+	    super.onPause();
+	    if (!player.leaveBand()) {
+	        Toast.makeText(this, "Network error.", Toast.LENGTH_LONG).show();
+	    }
 	}
 
 	@Override

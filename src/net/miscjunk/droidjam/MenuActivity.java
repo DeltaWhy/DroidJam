@@ -21,17 +21,23 @@ public class MenuActivity extends Activity {
     ViewSwitcher viewSwitcher;
     EditText usernameField;
     String username;
+    String playerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);  
         prefs = getSharedPreferences("DroidJam",Context.MODE_PRIVATE);
         username = prefs.getString("username", "");
+        playerId = prefs.getString("playerId", "");
         setContentView(R.layout.activity_menu);
         viewSwitcher = (ViewSwitcher)findViewById(R.id.viewSwitcher1);
         usernameField = (EditText)findViewById(R.id.usernameField);
         
         usernameField.setText(username);
+        
+        if (!playerId.isEmpty()) viewSwitcher.showNext();
     }
 
     @Override
@@ -49,10 +55,17 @@ public class MenuActivity extends Activity {
         if (username.trim().equals("")) {
             Toast.makeText(this, "Please enter a username.", Toast.LENGTH_SHORT).show();
         } else {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("username", username);
-            editor.commit();
-            viewSwitcher.showNext();
+            Player player = new Player(username);
+            if (player.create()) {
+                playerId = player.getId();
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("username", username);
+                editor.putString("playerId", playerId);
+                editor.commit();
+                viewSwitcher.showNext();
+            } else {
+                Toast.makeText(this, "Network error.", Toast.LENGTH_LONG).show();
+            }
         }
     }
     

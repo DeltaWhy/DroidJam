@@ -14,6 +14,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -139,6 +140,53 @@ public class CommService {
         String jsonString = null;
         try {
             jsonString = httpclient.execute(httpost, responseHandler);
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        JSONObject jResponse = null;
+        if (jsonString != null) {
+            try {
+                jResponse = new JSONObject(jsonString);				
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return jResponse;
+    }
+	
+    public JSONObject putJSON(String url, JSONObject jRequest)
+    {
+        //instantiates httpclient to make request
+        DefaultHttpClient httpclient = new DefaultHttpClient();
+
+        //url with the post data
+        HttpPut httpput = new HttpPut(url);
+
+        //passes the results to a string builder/entity
+        StringEntity se;
+        try {
+            se = new StringEntity(jRequest.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        //sets the post request as the resulting string
+        httpput.setEntity(se);
+        //sets a request header so the page receving the request
+        //will know what to do with it
+        httpput.setHeader("Accept", "application/json");
+        httpput.setHeader("Content-type", "application/json");
+
+        //Handles what is returned from the page 
+        ResponseHandler responseHandler = new BasicResponseHandler();
+        String jsonString = null;
+        try {
+            jsonString = httpclient.execute(httpput, responseHandler);
         } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
