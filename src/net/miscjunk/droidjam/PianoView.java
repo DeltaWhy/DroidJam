@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 
 public class PianoView extends InstrumentView {
@@ -13,8 +12,8 @@ public class PianoView extends InstrumentView {
 	private boolean[] whiteKeys;
 	private boolean[] blackKeys;
 	private int[] notesHeld;
-	int width;
-	int height;
+	private int width;
+	private int height;
 	
 	public PianoView(Context context) {
         super(context);
@@ -25,6 +24,9 @@ public class PianoView extends InstrumentView {
 
     public PianoView(Context context, AttributeSet attribs) {
         super(context, attribs);
+    	whiteKeys = new boolean[10];
+    	blackKeys = new boolean[7];
+    	notesHeld = new int[4];
     }
     
 	protected void onDraw(Canvas c) {

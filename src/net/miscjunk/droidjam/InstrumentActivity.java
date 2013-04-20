@@ -32,7 +32,7 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
         layout = (ViewGroup)findViewById(R.id.instrumentLayout);
         //TODO dynamically load an InstrumentView
         //TODO dynamically load sound samples
-        instrumentView = new PianoView(this);
+        instrumentView = new DrumView(this);
         instrumentView.setNoteListener(this);
         layout.addView(instrumentView);
         sound = new SquareSound(this);
