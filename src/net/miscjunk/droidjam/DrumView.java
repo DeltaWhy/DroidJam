@@ -21,18 +21,18 @@ public class DrumView extends InstrumentView {
 	
 	private static final long BEATLENGTH = 100; 
 	
-	private static final int BASS = 60; //36;
+	private static final int BASS = 36;
 	private Coordinate bassCenter = new Coordinate();
-	private static final int SNARE = 64; //38;
+	private static final int SNARE = 38;
 	private Coordinate snareCenter = new Coordinate();
-	private static final int SYMBOL = 67; //42;
-	private Coordinate symbolCenter = new Coordinate();
+	private static final int CYMBAL = 42;
+	private Coordinate cymbalCenter = new Coordinate();
 	private int largeRadius;
-	private static final int LOWTOM = 72; //45;
+	private static final int LOWTOM = 45;
 	private Coordinate lowtomCenter = new Coordinate();
-	private static final int MEDTOM = 76; //47;
+	private static final int MEDTOM = 47;
 	private Coordinate medtomCenter = new Coordinate();
-	private static final int HIGHTOM = 76; //50;
+	private static final int HIGHTOM = 50;
 	private Coordinate hightomCenter = new Coordinate();
 	private int smallRadius;
 	
@@ -57,8 +57,8 @@ public class DrumView extends InstrumentView {
 		lowtomCenter.x = width / 6; 
 		lowtomCenter.y = height / 6 * 3;
 
-		symbolCenter.x = width * 13 / 16;
-		symbolCenter.y = height / 4;
+		cymbalCenter.x = width * 13 / 16;
+		cymbalCenter.y = height / 4;
 		bassCenter.x = width * 11 / 16;
 		bassCenter.y = height * 3 / 4;
 		snareCenter.x = width * 6 / 16;
@@ -71,7 +71,7 @@ public class DrumView extends InstrumentView {
 		c.drawCircle(lowtomCenter.x, lowtomCenter.y, smallRadius, whitePaint);
 		c.drawCircle(bassCenter.x, bassCenter.y, largeRadius, whitePaint);
 		c.drawCircle(snareCenter.x, snareCenter.y, largeRadius, whitePaint);
-		c.drawCircle(symbolCenter.x, symbolCenter.y, largeRadius, whitePaint);
+		c.drawCircle(cymbalCenter.x, cymbalCenter.y, largeRadius, whitePaint);
 	}
 	
 	public boolean onTouchEvent(MotionEvent event) {
@@ -83,8 +83,8 @@ public class DrumView extends InstrumentView {
 				type = BASS;
 			} else if (intersect(x, y, snareCenter.x, snareCenter.y, largeRadius)) {
 				type = SNARE;
-			} else if (intersect(x, y, symbolCenter.x, symbolCenter.y, largeRadius)) {
-				type = SYMBOL;
+			} else if (intersect(x, y, cymbalCenter.x, cymbalCenter.y, largeRadius)) {
+				type = CYMBAL;
 			} else if (intersect(x, y, hightomCenter.x, hightomCenter.y, smallRadius)) {
 				type = HIGHTOM;
 			} else if (intersect(x, y, medtomCenter.x, medtomCenter.y, smallRadius)) {

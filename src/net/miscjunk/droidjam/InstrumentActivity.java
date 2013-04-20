@@ -35,7 +35,7 @@ public class InstrumentActivity extends Activity implements InstrumentView.NoteL
         instrumentView = new DrumView(this);
         instrumentView.setNoteListener(this);
         layout.addView(instrumentView);
-        sound = new SquareSound(this);
+        sound = new DrumsSound(this);
         midi = new MidiCreator(this, "/storage/sdcard0/droidjam"+(new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date())+".mid");
         midi.beginRecording();
     }
