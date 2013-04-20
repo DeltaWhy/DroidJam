@@ -31,10 +31,18 @@ public class OneNoteSambaActivity extends Activity {
 		music.beginRecording();	
 	}
 	public void noteon(View view){		
-		music.noteOn(80, 100);
+		music.noteOn(40, 100);
 	}
 	public void noteoff(View view){		
+		music.noteOn(40, 100);
+	}
+	
+	public void noteon1(View view){		
 		music.noteOn(80, 100);
 	}
+	public void noteoff1(View view){		
+		music.noteOn(80, 100);
+	}
+
 
 }

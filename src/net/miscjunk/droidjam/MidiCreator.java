@@ -20,6 +20,7 @@ public class MidiCreator {
     final int CHANNEL = 0;
     MidiTrack tempoTrack = new MidiTrack();
     MidiTrack noteTrack = new MidiTrack();
+    MidiTrack secondTrack = new MidiTrack();
     long startTime;
 
 
@@ -58,15 +59,6 @@ public class MidiCreator {
         ArrayList<MidiTrack> tracks = new ArrayList<MidiTrack>();
         tracks.add(tempoTrack);
         tracks.add(noteTrack);
-
-        MidiFile midi = new MidiFile(MidiFile.DEFAULT_RESOLUTION, tracks);
-
-        File output = new File(filename);
-        try {
-            midi.writeToFile(output);
-        } catch(IOException e) {
-            System.err.println(e);
-        }        
     }
 
 
