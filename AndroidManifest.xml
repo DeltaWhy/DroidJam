@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -33,6 +34,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.miscjunk.droidjam.MenuActivity" />
+        </activity>
+        <activity
+            android:name="net.miscjunk.droidjam.OneNoteSambaActivity"
+            android:label="@string/title_activity_one_note_samba" >
         </activity>
         <activity
             android:name="net.miscjunk.droidjam.InstrumentActivity"

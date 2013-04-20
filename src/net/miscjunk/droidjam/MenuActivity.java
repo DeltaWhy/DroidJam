@@ -59,7 +59,8 @@ public class MenuActivity extends Activity {
     }
     
     public void joinBand(View v) {
-        Intent intent = new Intent(this, JoinBandActivity.class);
+        //Intent intent = new Intent(this, JoinBandActivity.class);
+        Intent intent = new Intent(this, OneNoteSambaActivity.class);
         startActivity(intent);
     }
 }
